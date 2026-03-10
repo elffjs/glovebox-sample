@@ -26,6 +26,34 @@ h1 {
   margin-bottom: 32px;
 }
 
+/* Token ID input */
+.token-id-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.token-id-input label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+  white-space: nowrap;
+}
+
+.token-id-input input {
+  width: 140px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.token-id-input input:disabled {
+  opacity: 0.5;
+}
+
 /* Drop zone */
 .dropzone {
   border: 2px dashed #ccc;

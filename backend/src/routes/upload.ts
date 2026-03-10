@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 import { convertToImage } from "../services/convert.js";
 import { parseDocumentImage } from "../services/openai.js";
+import { attestDocument } from "../services/attest.js";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -17,6 +18,8 @@ router.post("/", upload.single("file"), async (req, res) => {
       return;
     }
 
+    const tokenId = req.body.tokenId as string | undefined;
+
     const { buffer, mimetype, originalname } = req.file;
     console.log(`Received: ${originalname} (${mimetype}, ${buffer.length} bytes)`);
 
@@ -25,6 +28,11 @@ router.post("/", upload.single("file"), async (req, res) => {
 
     const result = await parseDocumentImage(base64, mediaType);
     console.log(`Parsed:`, JSON.stringify(result, null, 2));
+
+    if (tokenId) {
+      await attestDocument(result, tokenId);
+      console.log(`Attested to vehicle token ${tokenId}`);
+    }
 
     res.json(result);
   } catch (err: unknown) {

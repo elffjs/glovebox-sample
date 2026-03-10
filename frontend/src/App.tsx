@@ -16,6 +16,7 @@ export default function App() {
   const [fileName, setFileName] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isPdf, setIsPdf] = useState(false);
+  const [tokenId, setTokenId] = useState("");
   const prevUrlRef = useRef<string | null>(null);
 
   async function handleUpload(file: File) {
@@ -36,6 +37,9 @@ export default function App() {
     try {
       const formData = new FormData();
       formData.append("file", file);
+      if (tokenId.trim()) {
+        formData.append("tokenId", tokenId.trim());
+      }
 
       const res = await fetch("/api/upload", {
         method: "POST",
@@ -63,6 +67,20 @@ export default function App() {
       <p className="subtitle">
         Drop a vehicle document to extract structured data
       </p>
+
+      <div className="token-id-input">
+        <label htmlFor="tokenId">Vehicle Token ID</label>
+        <input
+          id="tokenId"
+          type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          placeholder="e.g. 22892"
+          value={tokenId}
+          onChange={(e) => setTokenId(e.target.value)}
+          disabled={loading}
+        />
+      </div>
 
       <DropZone onFile={handleUpload} disabled={loading} />
 
