@@ -1,0 +1,10 @@
+{
+  "name": "glovebox-sample",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel -r run dev"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "esbuild", "canvas"]
+  }
+}
