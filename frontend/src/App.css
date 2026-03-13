@@ -54,6 +54,27 @@ h1 {
   opacity: 0.5;
 }
 
+.browse-btn {
+  padding: 8px 16px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.browse-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.browse-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 /* Drop zone */
 .dropzone {
   border: 2px dashed #ccc;
@@ -237,4 +258,66 @@ h1 {
   word-break: break-word;
   max-height: 300px;
   overflow-y: auto;
+}
+
+/* Attestation Browser */
+.back-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 4px 0;
+  margin-bottom: 12px;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.attestation-browser h2 {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+.empty-state {
+  margin-top: 24px;
+  padding: 32px;
+  text-align: center;
+  color: #888;
+  background: #fafafa;
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+}
+
+.attestation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attestation-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.att-field {
+  display: flex;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+.att-label {
+  font-weight: 600;
+  color: #444;
+  min-width: 110px;
+  flex-shrink: 0;
+}
+
+.att-value {
+  color: #333;
+  word-break: break-all;
 }

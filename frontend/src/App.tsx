@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import DropZone from "./components/DropZone";
 import ResultDisplay from "./components/ResultDisplay";
+import AttestationBrowser from "./components/AttestationBrowser";
 
 interface ParsedResult {
   documentType: string;
@@ -17,6 +18,7 @@ export default function App() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isPdf, setIsPdf] = useState(false);
   const [tokenId, setTokenId] = useState("");
+  const [view, setView] = useState<"upload" | "attestations">("upload");
   const prevUrlRef = useRef<string | null>(null);
 
   async function handleUpload(file: File) {
@@ -80,8 +82,22 @@ export default function App() {
           onChange={(e) => setTokenId(e.target.value)}
           disabled={loading}
         />
+        <button
+          className="browse-btn"
+          disabled={!tokenId.trim() || loading}
+          onClick={() => setView("attestations")}
+        >
+          Browse Attestations
+        </button>
       </div>
 
+      {view === "attestations" ? (
+        <AttestationBrowser
+          tokenId={tokenId.trim()}
+          onBack={() => setView("upload")}
+        />
+      ) : (
+      <>
       <DropZone onFile={handleUpload} disabled={loading} />
 
       {loading && previewUrl && (
@@ -108,6 +124,8 @@ export default function App() {
       )}
 
       {result && <ResultDisplay result={result} fileName={fileName} previewUrl={previewUrl} isPdf={isPdf} />}
+      </>
+      )}
     </div>
   );
 }

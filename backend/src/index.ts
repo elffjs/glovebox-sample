@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import uploadRouter from "./routes/upload.js";
+import attestationsRouter from "./routes/attestations.js";
 import { authenticate } from "./services/dimo.js";
 
 const app = express();
@@ -15,6 +16,7 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/api/upload", uploadRouter);
+app.use("/api/attestations", attestationsRouter);
 
 app.listen(PORT, async () => {
   console.log(`Backend listening on http://localhost:${PORT}`);
